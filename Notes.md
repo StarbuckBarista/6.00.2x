@@ -16,7 +16,7 @@
 * What defines the "best" item to choose in a Greedy Algorithm?
 * Modularity in programming can be very useful and is a very important aspect of good programming.
 ```Python
-def greedy(items: list, maxCost: int, keyFunction):
+def greedy(items, maxCost, keyFunction):
     itemsCopy = sorted(items, key = keyFunction, reverse = True) # Sorts the items from best to worst based on our definition of the "best" item defined in keyFunction
 
     result = []
@@ -35,3 +35,43 @@ def greedy(items: list, maxCost: int, keyFunction):
 * Greedy Algorithms usual finds a Local Optimum which is not necessarily the Global Optimum.
 * Any one Key Function will not always give you the best approximate answer, there is no way to tell which Key Function will provide the best answer.
 * Greedy Algoritms are easy to implement and computationally effecient, but they do not always provide the best solution.
+
+## Lecture 2
+* The process of Brute Force algorithms can be implemented into code using a Search Tree.
+* Search Trees in built top down starting with the root, and the first element is selected from the group of items.
+* If that item meets the constraints, a node is constructed that reflects a consequence of choosing to take that item (left child), and the consequences of that action (right child).
+* The process is then applied recursively to non-leaf children.
+* Left-first, depth-first enumeration is when you always choose the left decision first all the way to the bottom of the tree, then to begin backing up to the next decision.
+* Brute Force Algorithms are guaranteed to find the most optimal solution because it shows all possible combinations.
+* Time is based on the number of nodes in the Search Tree.
+* To find the number of nodes there will be, look at the number of levels in the tree and the number of nodes per level.
+* The number of levels is the number of items to choose from, and the number of nodes at level *i* is *2<sup>i</sup>*
+* If there are *n* items, the number of nodes can be shown as:
+* ![number_of_nodes](http://latex.codecogs.com/svg.latex?%5Csum_%7Bi%3D0%7D%5E%7Bi=n%7D2^i)
+* The Search Tree can be simplified by stopping the continuation of the tree once the constraints are broken.
+```Python
+def maxVal(toConsider, avail):
+    """Assumes toConsider a list of items, avail a weight
+    Returns a tuples of the total value of a solution to the 0/1 knapsack
+    problem and the items of that solution"""
+    if toConsider == [] or avail == 0: # Stops the exploration of that path as there are no longer available items or the constraint has been broken
+        result = (0, ())
+    elif toConsider[0].getCost() > avail: # Explorting the right branch only because the left branch would break the constraint
+        result = maxVal(toConsider[1:], avail)
+    else:
+        nextItem = toConsider[0]
+
+        # Left branch
+        withVal, withToTake = maxVal(toConsider[1:], avail - nextItem.getCost())
+        withVal += nextItem.getValue()
+
+        # Right branch
+        withoutVal, withoutToTake = maxVal(toConsider[1:], avail)
+
+        # Explore the better branch
+        if withVal > withoutVal:
+            result = (withVal, withToTake + (nextItem,))
+        else:
+            result = (withoutVal, withoutToTake)
+    return result
+```
