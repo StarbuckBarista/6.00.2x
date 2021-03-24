@@ -11,8 +11,6 @@
 * Brute Force Algorithms can often be unpractical because of how large power sets can get, and since Brute Force Algorithms are exponential, they perform terribly with large power sets.
 * The Knapsack Problem is inherently exponential, there is no solution that will not be exponential.
 * There still are good methods for finding approximate solutions to Knapsack Problems that work almost all of the time.
-
-## Lecture 2
 * Greedy Algorithms are a common replacement for Optimization Models as they are much quicker and provide an approximate solution.
 * Greedy Algorithms work by choosing the best available item in which the constraints are met.
 * What defines the "best" item to choose in a Greedy Algorithm?
