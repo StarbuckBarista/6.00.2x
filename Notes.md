@@ -47,7 +47,7 @@ def greedy(items, maxCost, keyFunction):
 * To find the number of nodes there will be, look at the number of levels in the tree and the number of nodes per level.
 * The number of levels is the number of items to choose from, and the number of nodes at level *i* is *2<sup>i</sup>*
 * If there are *n* items, the number of nodes can be shown as:
-![number_of_nodes](http://latex.codecogs.com/svg.latex?%5Csum_%7Bi%3D0%7D%5E%7Bi=n%7D2^i)
+* ![number_of_nodes](http://latex.codecogs.com/svg.latex?%5Csum_%7Bi%3D0%7D%5E%7Bi=n%7D2^i)
 * The Search Tree can be simplified by stopping the continuation of the tree once the constraints are broken.
 ```Python
 def maxVal(toConsider, avail):
